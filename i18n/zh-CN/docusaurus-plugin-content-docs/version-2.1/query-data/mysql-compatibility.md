@@ -25,7 +25,7 @@ under the License.
 -->
 
 
-Doris 是高度兼容 MySQL 语法，支持标准 SQL。但是 Doris 与 MySQL 还是有很多不同的地方，下面给出了他们的差异点介绍。
+Doris 高度兼容 MySQL 语法，支持标准 SQL。但是 Doris 与 MySQL 还是有很多不同的地方，下面给出了他们的差异点介绍。
 
 ## 数据类型
 
@@ -84,7 +84,7 @@ Doris 是高度兼容 MySQL 语法，支持标准 SQL。但是 Doris 与 MySQL �
 
 - **BITMAP**
 
-  BITMAP 类型的列可以在 Aggregate 表、Unique 表或 Duplicate 表中使用，但必须作为非 Key 列。在 Unique 表或 Duplicate 表中使用时，同样需遵循此规则。在 Aggregate 表中使用时，还需配合 BITMAP_UNION 聚合类型。用户无需指定长度和默认值，长度会根据数据的聚合程度由系统内部控制。并且，BITMAP 列只能通过配套的 BITMAP_UNION_COUNT、BITMAP_UNION、BITMAP_HASH、BITMAP_HASH64 等函数进行查询或使用。
+  BITMAP 类型的列可以在 Aggregate 表、Unique 表或 Duplicate 表中使用，但必须作为非 Key 列。在 Aggregate 表中使用时，还需配合 BITMAP_UNION 聚合类型。用户无需指定长度和默认值，长度会根据数据的聚合程度由系统内部控制。并且，BITMAP 列只能通过配套的 BITMAP_UNION_COUNT、BITMAP_UNION、BITMAP_HASH、BITMAP_HASH64 等函数进行查询或使用。
 
   离线场景下使用 BITMAP 可能会影响导入速度，在数据量大的情况下，其查询速度会慢于 HLL，但优于 Count Distinct。注意：在实时场景下，如果 BITMAP 不使用全局字典，而使用了 BITMAP_HASH()，可能会导致约千分之一的误差。如果此误差不可接受，可以使用 BITMAP_HASH64。
 
@@ -96,7 +96,7 @@ Doris 是高度兼容 MySQL 语法，支持标准 SQL。但是 Doris 与 MySQL �
 
 - **Array<T\>**
 
-  Array 由 T 类型元素组成的数组，不能作为 Key 列使用。目前支持在 Duplicate 模型的表中使用，也支持在 Unique 模型的表中非 Key 列使用。
+  Array 由 T 类型元素组成的数组，不能作为 Key 列使用。目前支持在 Duplicate 模型的表和 Unique 模型的表中使用。
 
   T 类型包括：BOOLEAN, TINYINT, SMALLINT, INT, BIGINT, LARGEINT, FLOAT, DOUBLE, DECIMAL, DATE, DATETIME,CHAR, VARCHAR, STRING
 
@@ -124,7 +124,7 @@ Doris 是高度兼容 MySQL 语法，支持标准 SQL。但是 Doris 与 MySQL �
 
   用户不需要指定长度和默认值。实际存储的数据大小与函数实现有关。
 
-  AGG_STATE 只能配合[STATE](../sql-manual/sql-functions/combinators/state) / [MERGE](../sql-manual/sql-functions/combinators/merge) / [UNION](../sql-manual/sql-functions/combinators/union)函数组合器使用。 
+  AGG_STATE 只能配合 [STATE](../sql-manual/sql-functions/combinators/state) / [MERGE](../sql-manual/sql-functions/combinators/merge) / [UNION](../sql-manual/sql-functions/combinators/union) 函数组合器使用。 
 
 ## 语法区别
 
